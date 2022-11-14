@@ -35,6 +35,7 @@ const HeatmapModel = ({ assetPrefix }: HeatmapModelProps) => {
             receiveShadow
             geometry={node.geometry}
             material={mat}
+            renderOrder={1}
           />
         );
       })}

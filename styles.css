@@ -64,6 +64,11 @@ body {
 }
 
 @media only screen and (max-width: 480px) {
+  .buttons {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
   .buttons img {
     max-width: 25px;
     max-height: 25px;
@@ -75,14 +80,11 @@ body {
     padding-right: 6px;
     font-family: 'Montserrat', sans-serif;
   }
-}
-
-@media only screen and (max-width: 395px) {
   .buttons > :first-child {
     margin-right: 0;
     margin-bottom: 6px;
   }
   .buttons {
-    bottom: 80px;
+    bottom: 100px;
   }
 }
