@@ -66,7 +66,7 @@ const NavigationControls = ({
           new THREE.Vector3(0, 1, 0),
           THREE.MathUtils.degToRad(-50 * movementX)
         );
-        camera.rotateX(movementY);
+        camera.rotateX(-movementY);
       }
 
       mouse.prevTouch[0] = ev.touches[0].pageX;
