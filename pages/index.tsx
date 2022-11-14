@@ -1,9 +1,12 @@
 import { useState, useCallback } from "react";
 import { Canvas } from "@react-three/fiber";
 import Head from "next/head";
+import Image from "next/image";
 import StoreModel from "../components/StoreModel";
 import HeatmapModel from "../components/HeatmapModel";
 import NavigationControls from "../components/NavigationControls";
+//import modelIcon from "../public/images/model-icon.png";
+//import heatmapIcon from "../public/images/heatmap-icon.png";
 
 const ASSET_PREFIX =
   process.env.NODE_ENV === "production" ? "/heatmap-visualization" : "";
@@ -13,6 +16,10 @@ const HomePage = () => {
   const [showHeatmap, setShowHeatmap] = useState(true);
   const handleToggleHeatmap = useCallback(() => setShowHeatmap((b) => !b), []);
   const handleToggleModel = useCallback(() => setShowModel((b) => !b), []);
+  const modelIcon = `/images/${showModel ? "" : "disabled-"}model-icon.png`;
+  const heatmapIcon = `/images/${
+    showHeatmap ? "" : "disabled-"
+  }heatmap-icon.png`;
   return (
     <div style={{ height: "100vh" }}>
       <Head>
@@ -21,14 +28,7 @@ const HomePage = () => {
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
         />
       </Head>
-      <div className="buttons">
-        <button onClick={handleToggleModel}>
-          {showModel ? "Hide" : "Show"} 3D Model
-        </button>
-        <button onClick={handleToggleHeatmap}>
-          {showHeatmap ? "Hide" : "Show"} Heatmap
-        </button>
-      </div>
+
       <div style={{ height: "100%" }}>
         <Canvas>
           <NavigationControls
@@ -40,6 +40,24 @@ const HomePage = () => {
           {showModel ? <StoreModel assetPrefix={ASSET_PREFIX} /> : null}
           {showHeatmap ? <HeatmapModel assetPrefix={ASSET_PREFIX} /> : null}
         </Canvas>
+      </div>
+      <div className="buttons">
+        <button onClick={handleToggleModel}>
+          <Image
+            src={modelIcon}
+            alt={(showModel ? "Hide" : "Show") + " 3D Model"}
+            width={100}
+            height={100}
+          />
+        </button>
+        <button onClick={handleToggleHeatmap}>
+          <Image
+            src={heatmapIcon}
+            alt={(showHeatmap ? "Hide" : "Show") + " Heatmap"}
+            width={100}
+            height={100}
+          />
+        </button>
       </div>
     </div>
   );
