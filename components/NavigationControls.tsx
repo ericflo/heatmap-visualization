@@ -3,16 +3,17 @@ import { useEffect, useState, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 
 interface NavigationControlsProps {
-  onModeChange: (mode: string) => void;
+  onHeatmapToggle: () => void;
+  on3DModelToggle: () => void;
   cameraSensitivity: number;
 }
 
 const NavigationControls = ({
-  onModeChange,
+  onHeatmapToggle,
+  on3DModelToggle,
   cameraSensitivity,
 }: NavigationControlsProps) => {
   const { camera } = useThree();
-  const [mode, setMode] = useState("heatmap");
   const velocity = useRef(new THREE.Vector2(0, 0));
   const damping = 0.95;
   const speed = 0.025;
@@ -32,9 +33,9 @@ const NavigationControls = ({
       } else if (isL || isR) {
         velocity.current.y += (isR ? 1 : -1) * speed;
       } else if (ev.key === "h") {
-        const nextMode = mode === "heatmap" ? "rgb" : "heatmap";
-        setMode(nextMode);
-        onModeChange?.(nextMode);
+        onHeatmapToggle?.();
+      } else if (ev.key === "m") {
+        on3DModelToggle?.();
       }
     };
 
@@ -102,7 +103,7 @@ const NavigationControls = ({
       window.removeEventListener("touchend", handleMouseUp);
       window.removeEventListener("touchcancel", handleMouseUp);
     };
-  }, [mode, cameraSensitivity, onModeChange]);
+  }, [cameraSensitivity]);
 
   useFrame((state, delta, frame) => {
     // Forward / Backward Movement

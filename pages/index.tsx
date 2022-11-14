@@ -9,9 +9,10 @@ const ASSET_PREFIX =
   process.env.NODE_ENV === "production" ? "/heatmap-visualization" : "";
 
 const HomePage = () => {
-  const [mode, setMode] = useState("heatmap");
-  const handleViewHeatmapClick = useCallback(() => setMode("heatmap"), []);
-  const handleView3DModelClick = useCallback(() => setMode("rgb"), []);
+  const [showModel, setShowModel] = useState(true);
+  const [showHeatmap, setShowHeatmap] = useState(true);
+  const handleToggleHeatmap = useCallback(() => setShowHeatmap((b) => !b), []);
+  const handleToggleModel = useCallback(() => setShowModel((b) => !b), []);
   return (
     <div style={{ height: "100vh" }}>
       <Head>
@@ -21,21 +22,23 @@ const HomePage = () => {
         />
       </Head>
       <div className="buttons">
-        {mode === "heatmap" ? (
-          <button onClick={handleView3DModelClick}>View 3D Model</button>
-        ) : (
-          <button onClick={handleViewHeatmapClick}>View Heatmap</button>
-        )}
+        <button onClick={handleToggleModel}>
+          {showModel ? "Hide" : "Show"} 3D Model
+        </button>
+        <button onClick={handleToggleHeatmap}>
+          {showHeatmap ? "Hide" : "Show"} Heatmap
+        </button>
       </div>
       <div style={{ height: "100%" }}>
         <Canvas>
-          <NavigationControls onModeChange={setMode} cameraSensitivity={0.2} />
+          <NavigationControls
+            onHeatmapToggle={handleToggleHeatmap}
+            on3DModelToggle={handleToggleModel}
+            cameraSensitivity={0.2}
+          />
           <ambientLight intensity={0.75} />
-          {mode === "heatmap" ? (
-            <HeatmapModel assetPrefix={ASSET_PREFIX} />
-          ) : (
-            <StoreModel assetPrefix={ASSET_PREFIX} />
-          )}
+          {showModel ? <StoreModel assetPrefix={ASSET_PREFIX} /> : null}
+          {showHeatmap ? <HeatmapModel assetPrefix={ASSET_PREFIX} /> : null}
         </Canvas>
       </div>
     </div>
