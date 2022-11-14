@@ -6,9 +6,10 @@ import { TextureLoader } from "three/src/loaders/TextureLoader";
 
 const HeatmapModel = () => {
   const group = useRef<THREE.Group>(null!);
-  const glbPath = "/models/rebuilt shop heatmap 04 8k.glb";
-  //const texPath = "/textures/new_tex.png";
-  const texPath = "/textures/meredith_map flattened 02 2K.png";
+  const prefix = process.env.NODE_ENV === 'production' ? '/heatmap-visualization' : '';
+  const glbPath = prefix + "/models/rebuilt shop heatmap 04 8k.glb";
+  //const texPath = prefix + "/textures/meredith_map flattened 02 2K.png";
+  const texPath = prefix + "/textures/new_tex.png";
   const { nodes } = useGLTF(glbPath);
   const colorMap = useLoader(TextureLoader, texPath);
   useEffect(() => {

@@ -3,5 +3,5 @@ module.exports = {
     loader: "akamai",
     path: "",
   },
-  assetPrefix: "./heatmap-visualization/",
+  assetPrefix: "./",
 };
