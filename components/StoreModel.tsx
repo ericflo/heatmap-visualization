@@ -2,9 +2,13 @@ import * as THREE from "three";
 import { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 
-const StoreModel = () => {
+interface StoreModelProps {
+  assetPrefix: string;
+}
+
+const StoreModel = ({ assetPrefix }: StoreModelProps) => {
   const group = useRef<THREE.Group>(null!);
-  const { nodes } = useGLTF("/models/store.glb");
+  const { nodes } = useGLTF(assetPrefix + "/models/store.glb");
   return (
     <group ref={group} dispose={null}>
       {Object.keys(nodes).map((key, i) => {

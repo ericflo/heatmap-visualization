@@ -4,12 +4,15 @@ import { useLoader } from "@react-three/fiber";
 import { useGLTF } from "@react-three/drei";
 import { TextureLoader } from "three/src/loaders/TextureLoader";
 
-const HeatmapModel = () => {
+interface HeatmapModelProps {
+  assetPrefix: string;
+}
+
+const HeatmapModel = ({ assetPrefix }: HeatmapModelProps) => {
   const group = useRef<THREE.Group>(null!);
-  const prefix = process.env.NODE_ENV === 'production' ? '/heatmap-visualization' : '';
-  const glbPath = prefix + "/models/rebuilt shop heatmap 04 8k.glb";
-  //const texPath = prefix + "/textures/meredith_map flattened 02 2K.png";
-  const texPath = prefix + "/textures/new_tex.png";
+  const glbPath = assetPrefix + "/models/rebuilt shop heatmap 04 8k.glb";
+  const texPath = assetPrefix + "/textures/meredith_map flattened 02 2K.png";
+  //const texPath = assetPrefix + "/textures/new_tex.png";
   const { nodes } = useGLTF(glbPath);
   const colorMap = useLoader(TextureLoader, texPath);
   useEffect(() => {

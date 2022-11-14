@@ -5,6 +5,9 @@ import StoreModel from "../components/StoreModel";
 import HeatmapModel from "../components/HeatmapModel";
 import NavigationControls from "../components/NavigationControls";
 
+const ASSET_PREFIX =
+  process.env.NODE_ENV === "production" ? "/heatmap-visualization" : "";
+
 const HomePage = () => {
   const [mode, setMode] = useState("heatmap");
   const handleViewHeatmapClick = useCallback(() => setMode("heatmap"), []);
@@ -28,7 +31,11 @@ const HomePage = () => {
         <Canvas>
           <NavigationControls onModeChange={setMode} cameraSensitivity={0.2} />
           <ambientLight intensity={0.75} />
-          {mode === "heatmap" ? <HeatmapModel /> : <StoreModel />}
+          {mode === "heatmap" ? (
+            <HeatmapModel assetPrefix={ASSET_PREFIX} />
+          ) : (
+            <StoreModel assetPrefix={ASSET_PREFIX} />
+          )}
         </Canvas>
       </div>
     </div>
