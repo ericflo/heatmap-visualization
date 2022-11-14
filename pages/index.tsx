@@ -10,14 +10,17 @@ import NavigationControls from "../components/NavigationControls";
 
 const ASSET_PREFIX =
   process.env.NODE_ENV === "production" ? "/heatmap-visualization" : "";
+const IMG_PREFIX = `${ASSET_PREFIX}/images`;
 
 const HomePage = () => {
   const [showModel, setShowModel] = useState(true);
   const [showHeatmap, setShowHeatmap] = useState(true);
   const handleToggleHeatmap = useCallback(() => setShowHeatmap((b) => !b), []);
   const handleToggleModel = useCallback(() => setShowModel((b) => !b), []);
-  const modelIcon = `/images/${showModel ? "" : "disabled-"}model-icon.png`;
-  const heatmapIcon = `/images/${
+  const modelIcon = `${IMG_PREFIX}/${
+    showModel ? "" : "disabled-"
+  }model-icon.png`;
+  const heatmapIcon = `${IMG_PREFIX}/${
     showHeatmap ? "" : "disabled-"
   }heatmap-icon.png`;
   return (
@@ -27,6 +30,16 @@ const HomePage = () => {
           name="viewport"
           content="width=device-width, initial-scale=1.0, maximum-scale=1.0,user-scalable=0"
         />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
 
       <div style={{ height: "100%" }}>
@@ -42,21 +55,29 @@ const HomePage = () => {
         </Canvas>
       </div>
       <div className="buttons">
-        <button onClick={handleToggleModel}>
+        <button
+          onClick={handleToggleModel}
+          className={showModel ? "activated" : ""}
+        >
           <Image
             src={modelIcon}
             alt={(showModel ? "Hide" : "Show") + " 3D Model"}
             width={100}
             height={100}
           />
+          <span>{(showModel ? "Hide" : "Show") + " 3D Model"}</span>
         </button>
-        <button onClick={handleToggleHeatmap}>
+        <button
+          onClick={handleToggleHeatmap}
+          className={showHeatmap ? "activated" : ""}
+        >
           <Image
             src={heatmapIcon}
             alt={(showHeatmap ? "Hide" : "Show") + " Heatmap"}
             width={100}
             height={100}
           />
+          <span>{(showHeatmap ? "Hide" : "Show") + " Heatmap"}</span>
         </button>
       </div>
     </div>

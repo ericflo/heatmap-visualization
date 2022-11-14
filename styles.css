@@ -22,10 +22,30 @@ body {
 
 .buttons > button {
   border-radius: 50px;
+  border: 4px solid #aaa;
+  background-color: rgba(255, 255, 255, 0.25);
+}
+
+.buttons > .activated {
+  border: 4px solid #fff;
+  background-color: rgba(0, 0, 0, .5);
 }
 
 .buttons img {
   max-width: 50px;
   max-height: 50px;
   margin: 10px;
+}
+
+.buttons > button > span {
+  color: #000;
+  font-size: 22px;
+  position: relative;
+  bottom: 22px;
+  padding-right: 12px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.buttons > button.activated > span {
+  color: #fff;
 }
