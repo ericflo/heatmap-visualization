@@ -1,5 +1,5 @@
-import { useState, useCallback } from "react";
-import { Canvas } from "@react-three/fiber";
+import { useState, useCallback, useEffect } from "react";
+import { Canvas, useThree } from "@react-three/fiber";
 import Head from "next/head";
 import Image from "next/image";
 import StoreModel from "../components/StoreModel";
@@ -12,6 +12,20 @@ const ASSET_PREFIX =
   process.env.NODE_ENV === "production" ? "/heatmap-visualization" : "";
 const IMG_PREFIX = `${ASSET_PREFIX}/images`;
 
+const InitialCameraSetup = () => {
+  const { camera } = useThree();
+  useEffect(() => {
+    camera.position.set(0.5652270391377908, -0.6096, 4.4364535039924355);
+    camera.rotation.set(
+      -1.506695914101631,
+      1.4448726362555877,
+      1.5061857385900277,
+      "XYZ"
+    );
+  }, [camera]);
+  return null;
+};
+
 const HomePage = () => {
   const [showModel, setShowModel] = useState(true);
   const [showHeatmap, setShowHeatmap] = useState(true);
@@ -23,6 +37,7 @@ const HomePage = () => {
   const heatmapIcon = `${IMG_PREFIX}/${
     showHeatmap ? "" : "disabled-"
   }heatmap-icon.png`;
+
   return (
     <div style={{ height: "100vh" }}>
       <Head>
@@ -44,6 +59,7 @@ const HomePage = () => {
 
       <div style={{ height: "100%" }}>
         <Canvas>
+          <InitialCameraSetup />
           <NavigationControls
             onHeatmapToggle={handleToggleHeatmap}
             on3DModelToggle={handleToggleModel}

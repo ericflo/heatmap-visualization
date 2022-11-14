@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 
 interface NavigationControlsProps {
