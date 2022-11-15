@@ -52,7 +52,7 @@ const HomePage = () => {
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
           rel="stylesheet"
         ></link>
       </Head>
@@ -70,6 +70,19 @@ const HomePage = () => {
           {showHeatmap ? <HeatmapModel assetPrefix={ASSET_PREFIX} /> : null}
         </Canvas>
       </div>
+
+      <div className="paxton-gate">
+        <a href="https://paxtongate.com/" target="_blank">
+          <Image
+            src={`${IMG_PREFIX}/pin-icon.png`}
+            alt="Location pin icon"
+            width={18}
+            height={18}
+          />
+          Paxton Gate
+        </a>
+      </div>
+
       <div className="buttons">
         <button
           onClick={handleToggleModel}

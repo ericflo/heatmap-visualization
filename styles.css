@@ -50,6 +50,26 @@ body {
   color: #fff;
 }
 
+.paxton-gate {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.paxton-gate a {
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  color: #aaa;
+}
+
+.paxton-gate img {
+  position: relative;
+  top: 3px;
+  right: 2px;
+}
+
 @media only screen and (max-width: 580px) {
   .buttons img {
     max-width: 25px;
